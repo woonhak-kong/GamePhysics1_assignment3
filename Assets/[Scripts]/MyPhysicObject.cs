@@ -17,7 +17,7 @@ public class MyPhysicObject : MonoBehaviour
     float radius = 0.0f;
 
     private Vector3 PreviousPosition;
-    public Vector3 NewPosition;
+    private Vector3 NewPosition;
 
 
     // Start is called before the first frame update
@@ -40,7 +40,7 @@ public class MyPhysicObject : MonoBehaviour
             transform.position = NewPosition;
 
 
-
+            // for gravity, Df = Di + AT
             Velocity.y = Velocity.y + Vector3.down.y * MyPhysicsSystem.GRAVITY * Time.deltaTime;
             //Velocity.x = Velocity.x * Time.deltaTime * 0.001f;
             //Velocity.z = Velocity.z * Time.deltaTime * 0.001f;

@@ -14,6 +14,7 @@ public class MyPhysicsSystem : MonoBehaviour
     private void Awake()
     {
         GRAVITY = Gravity;
+        // Get all objects using MyPhysicObejct script
         gameObjectList = new List<MyPhysicObject>(FindObjectsOfType<MyPhysicObject>());
     }
 
@@ -25,24 +26,18 @@ public class MyPhysicsSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (MyPhysicObject obj in gameObjectList)
-        {
-            //float newPositionY = obj.transform.position.y + gravity * Time.deltaTime * 0.1f;
-            //obj.transform.position = new Vector3(obj.transform.position.x, newPositionY, 0);
-            //Vector3 newAccelerationVector3 = obj.GetComponent<MyPhysicObject>().Velocity + Vector3.down * gravity * Time.deltaTime;
-            //obj.GetComponent<MyPhysicObject>().Velocity = newAccelerationVector3;
-        }
-
+        // Detect collision
         DetectCollision();
     }
 
     void DetectCollision()
     {
+        // Check every collision just once
         for (int i = 0; i < gameObjectList.Count; i++)
         {
             for (int j = i + 1; j < gameObjectList.Count; j++)
             {
-
+                // if they collide
                 if (CheckCollision(gameObjectList[i], gameObjectList[j]))
                 {
                     gameObjectList[i].Collision(gameObjectList[j]);
@@ -58,7 +53,8 @@ public class MyPhysicsSystem : MonoBehaviour
         MyPhysicObject second = obj2;
 
 
-        // PLANE Shape is always should be in first;
+        // PLANE Shape is always should be first,
+        // so that we can make calculation simple
         switch(obj1.shape)
         {
             case CollisionShapeE.SPHERE:
@@ -91,12 +87,14 @@ public class MyPhysicsSystem : MonoBehaviour
                 break;
         }
 
+        // between sphere and sphere
         if(first.shape == CollisionShapeE.SPHERE && second.shape == CollisionShapeE.SPHERE)
         {
+            // for finding orientation from fisrt to second
             Vector3 subResult = second.GetNewPosition() - first.GetNewPosition();
             float distanceBetweenObjs = Mathf.Sqrt(subResult.x * subResult.x + subResult.y * subResult.y + subResult.z * subResult.z);
             //Debug.Log("--------- " + distanceBetweenObjs);
-            // when the distance between two objects is less than the sum of two objects' radious, they collided.
+            // when the distance between two objects is less than the sum of two objects' radious, then they collide.
             if(distanceBetweenObjs < first.GetRadius() + second.GetRadius())
             {
                 Vector3 normalFirst = subResult.normalized;
@@ -107,6 +105,7 @@ public class MyPhysicsSystem : MonoBehaviour
                 Vector3 normalVelocitySecond = normalSecond * Vector3.Dot(normalSecond, second.Velocity);
                 Vector3 tangentialVelocitySecond = second.Velocity - normalVelocitySecond;
 
+                // for by using formular of the law of momentum conservation
                 first.Velocity = (normalVelocityFirst * (first.Mass - second.Mass) + normalVelocitySecond * (2 * second.Mass)) / (first.Mass + second.Mass) + tangentialVelocityFirst;
                 second.Velocity = (normalVelocitySecond * (second.Mass - first.Mass) + normalVelocityFirst * (2 * first.Mass)) / (first.Mass + second.Mass) + tangentialVelocitySecond;
 

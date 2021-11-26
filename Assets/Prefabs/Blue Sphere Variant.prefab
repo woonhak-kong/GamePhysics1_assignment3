@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 5
-  Velocity: {x: 2, y: 0, z: 2}
+  Velocity: {x: 1, y: 0, z: 1}
   shape: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &14090320755001619
@@ -25,11 +25,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8158669805349525052, guid: 3b62badc93a1b4c448716cc7ed1b74cd, type: 3}
       propertyPath: m_Name
-      value: Blue Sphere
+      value: Blue Sphere Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8613151216663006241, guid: 3b62badc93a1b4c448716cc7ed1b74cd, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613151216663006241, guid: 3b62badc93a1b4c448716cc7ed1b74cd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613151216663006241, guid: 3b62badc93a1b4c448716cc7ed1b74cd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613151216663006241, guid: 3b62badc93a1b4c448716cc7ed1b74cd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8613151216663006241, guid: 3b62badc93a1b4c448716cc7ed1b74cd, type: 3}
       propertyPath: m_LocalPosition.x
